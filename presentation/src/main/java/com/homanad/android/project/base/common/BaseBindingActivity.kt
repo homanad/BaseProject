@@ -1,8 +1,11 @@
 package com.homanad.android.project.base.common
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
@@ -10,16 +13,30 @@ abstract class BaseBindingActivity<B : ViewDataBinding> : AppCompatActivity() {
 
     private lateinit var _binding: B
 
-    protected val binding = _binding
+    protected val binding: B
+        get() = _binding
+
+    protected open val isEdgeToEdge = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         _binding = DataBindingUtil.setContentView(this, getContentRes())
+
+        if (isEdgeToEdge) configEdgeToEdge()
         restoreInstanceState(savedInstanceState)
         setupUI()
         handleUIEvent()
         handleUIState()
+    }
+
+    private fun configEdgeToEdge() {
+        enableEdgeToEdge()
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
     }
 
     @LayoutRes
