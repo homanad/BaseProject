@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.atomic.AtomicBoolean
 
 abstract class BaseViewModel<Intent, State>(
-    configs: ViewModelConfigs
+    configs: ViewModelConfigs = ViewModelConfigs()
 ) : ViewModel() {
 
     private val initialised = AtomicBoolean(false)
@@ -36,7 +36,7 @@ abstract class BaseViewModel<Intent, State>(
 
     protected open fun onFirstStart() {}
 
-    protected abstract fun processIntent(intent: Intent)
+    protected abstract suspend fun processIntent(intent: Intent)
 
     protected fun emitState(state: State) {
         viewModelScope.launch {
