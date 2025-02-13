@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -16,6 +18,8 @@ abstract class BaseViewModel<Intent, State>(
     private val _intentChannel = Channel<Intent>(configs.intentChannelSize)
 
     private val _stateChannel = Channel<State>(configs.stateChannelSize)
+
+    val stateFlow: Flow<State> = _stateChannel.receiveAsFlow()
 
     init {
         start()
@@ -37,6 +41,12 @@ abstract class BaseViewModel<Intent, State>(
     protected open fun onFirstStart() {}
 
     protected abstract suspend fun processIntent(intent: Intent)
+
+    fun sendIntent(intent: Intent) {
+        viewModelScope.launch {
+            _intentChannel.send(intent)
+        }
+    }
 
     protected fun emitState(state: State) {
         viewModelScope.launch {
