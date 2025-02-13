@@ -1,4 +1,4 @@
-package com.homanad.android.project.data.local.models
+package com.homanad.android.project.data.datasources.local.models
 
 class RoomModel(
     val id: String,

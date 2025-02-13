@@ -1,8 +1,8 @@
 package com.homanad.android.project.data.repositories
 
-import com.homanad.android.project.data.local.daos.ModelDao
+import com.homanad.android.project.data.datasources.local.daos.ModelDao
 import com.homanad.android.project.data.mappers.toMyEntity
-import com.homanad.android.project.data.remote.services.MyService
+import com.homanad.android.project.data.datasources.remote.services.MyService
 import com.homanad.android.project.domain.entities.MyEntity
 import com.homanad.android.project.domain.repositories.MyRepository
 import kotlin.random.Random
