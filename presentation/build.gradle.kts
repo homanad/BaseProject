@@ -15,8 +15,13 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = getInstrumentation()
+//        testInstrumentationRunner = "com.homanad.android.project.base.cucumber.runner.CucumberTestRunner"
     }
+
+//    sourceSets["androidTest"].assets {
+//        srcDirs("src/androidTest/assets")
+//    }
 
     buildTypes {
         release {
@@ -25,6 +30,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+
+        debug {
+            buildConfigField("String", "TEST_TAGS", "\"${getTags()}\"")
+            buildConfigField("String", "TEST_SCENARIO", "\"${getTestScenarios()}\"")
         }
     }
     compileOptions {
@@ -37,7 +47,22 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
+}
+
+fun getInstrumentation(): String {
+    return if (project.hasProperty("cucumber"))
+        "com.homanad.android.project.base.cucumber.runner.CucumberTestRunner"
+    else "androidx.test.runner.AndroidJUnitRunner"
+}
+
+fun getTags(): String {
+    return (project.properties["tags"] as? String?) ?: ""
+}
+
+fun getTestScenarios(): String {
+    return (project.properties["scenario"] as? String?) ?: ""
 }
 
 dependencies {
@@ -55,4 +80,7 @@ dependencies {
     testImplementation(libs.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.cucumber.android.test)
+//    androidTestImplementation(libs.android.support.test )
+    androidTestImplementation(libs.cucumber.picocontainer.test)
 }
