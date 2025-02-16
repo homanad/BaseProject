@@ -19,10 +19,6 @@ android {
 //        testInstrumentationRunner = "com.homanad.android.project.base.cucumber.runner.CucumberTestRunner"
     }
 
-//    sourceSets["androidTest"].assets {
-//        srcDirs("src/androidTest/assets")
-//    }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -34,7 +30,7 @@ android {
 
         debug {
             buildConfigField("String", "TEST_TAGS", "\"${getTags()}\"")
-            buildConfigField("String", "TEST_SCENARIO", "\"${getTestScenarios()}\"")
+            buildConfigField("String", "TEST_SCENARIO", "\"${getScenarios()}\"")
         }
     }
     compileOptions {
@@ -61,7 +57,7 @@ fun getTags(): String {
     return (project.properties["tags"] as? String?) ?: ""
 }
 
-fun getTestScenarios(): String {
+fun getScenarios(): String {
     return (project.properties["scenario"] as? String?) ?: ""
 }
 
@@ -81,6 +77,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.cucumber.android.test)
-//    androidTestImplementation(libs.android.support.test )
     androidTestImplementation(libs.cucumber.picocontainer.test)
 }

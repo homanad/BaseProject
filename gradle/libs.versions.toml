@@ -13,7 +13,6 @@ constraintlayout = "2.2.0"
 lifecycleVersion = "2.8.7"
 coroutineTestVersion = "1.10.1"
 cucumberVersion = "1.2.5"
-androidSupportTestVersion = "1.0.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,7 +27,6 @@ androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTestVersion" }
 cucumber-android-test = { group = "info.cukes", name = "cucumber-android", version.ref = "cucumberVersion" }
 cucumber-picocontainer-test = { group = "info.cukes", name = "cucumber-picocontainer", version.ref = "cucumberVersion" }
-android-support-test = { group = "com.android.support.test", name = "runner", version.ref = "androidSupportTestVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
