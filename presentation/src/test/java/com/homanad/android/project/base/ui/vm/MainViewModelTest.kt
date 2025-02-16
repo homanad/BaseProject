@@ -35,15 +35,15 @@ class MainViewModelTest {
     @Test
     fun shouldReturnSomething() = runTest {
         val useCase = GetSomethingUseCase(DummyRepoImpl())
-        val result = useCase()
+        val result = useCase(5)
 
-        assert(result.id == "abc")
+        assert(result?.id == 5)
     }
 
     @Test
     fun shouldReturnSomethings() = runTest {
         val useCase = GetSomethingsUseCase(DummyRepoImpl())
-        val result = useCase(0)
+        val result = useCase()
 
         assert(result.size == 3)
     }
@@ -51,15 +51,17 @@ class MainViewModelTest {
 
 class DummyRepoImpl : MyRepository {
 
-    override suspend fun getSomething(): MyEntity {
-        return MyEntity("abc", "pro1", "pro2", "pro3")
+    override suspend fun getSomething(param: Int): MyEntity? {
+        return dummyData.find { it.id == param }
     }
 
-    override suspend fun getSomething(param: Int): List<MyEntity> {
-        return listOf(
-            MyEntity("abc1", "pro1", "pro2", "pro3"),
-            MyEntity("abc2", "pro1", "pro2", "pro3"),
-            MyEntity("abc3", "pro1", "pro2", "pro3")
-        )
+    override suspend fun getSomethings(): List<MyEntity> {
+        return dummyData
     }
 }
+
+private val dummyData = listOf(
+    MyEntity(5, "pro1", "pro2", "pro3"),
+    MyEntity(6, "pro1", "pro2", "pro3"),
+    MyEntity(7, "pro1", "pro2", "pro3")
+)
