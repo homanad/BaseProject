@@ -3,15 +3,17 @@ package com.homanad.android.project.data.datasources.local.daos
 import com.homanad.android.project.data.datasources.local.models.RoomModel
 
 class ModelDaoImpl : ModelDao {
-    override fun getSomething(): RoomModel {
-        return RoomModel("id", "My", "name", "is 'getSomething from ModelDao'")
+    override fun getSomething(param: Int): RoomModel? {
+        return dummyLocal.find { param == it.id }
     }
 
-    override fun getSomething(param: Int): List<RoomModel> {
-        return listOf(
-            RoomModel("id", "My", "name", "is 'getSomething from ModelDao 1'"),
-            RoomModel("id", "My", "name", "is 'getSomething from ModelDao 2'"),
-            RoomModel("id", "My", "name", "is 'getSomething from ModelDao 3'")
-        )
+    override fun getSomethings(): List<RoomModel> {
+        return dummyLocal
     }
 }
+
+val dummyLocal = listOf(
+    RoomModel(1, "My", "name", "is 'getSomething from ModelDao 1'"),
+    RoomModel(2, "My", "name", "is 'getSomething from ModelDao 2'"),
+    RoomModel(3, "My", "name", "is 'getSomething from ModelDao 3'")
+)

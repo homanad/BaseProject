@@ -4,15 +4,17 @@ import com.homanad.android.project.data.datasources.remote.models.RemoteModel
 
 class MyServiceImpl : MyService {
 
-    override fun getSomething(): RemoteModel {
-        return RemoteModel("id", "My", "name", "is 'getSomething from MyService'")
+    override fun getSomething(param: Int): RemoteModel? {
+        return dummyRemote.find { it.id == param }
     }
 
-    override fun getSomething(param: Int): List<RemoteModel> {
-        return listOf(
-            RemoteModel("id", "My", "name", "is 'getSomething from MyService 1'"),
-            RemoteModel("id", "My", "name", "is 'getSomething from MyService 2'"),
-            RemoteModel("id", "My", "name", "is 'getSomething from MyService 3'")
-        )
+    override fun getSomethings(): List<RemoteModel> {
+        return dummyRemote
     }
 }
+
+val dummyRemote = listOf(
+    RemoteModel(1, "My", "name", "is 'getSomething from MyService 1'"),
+    RemoteModel(2, "My", "name", "is 'getSomething from MyService 2'"),
+    RemoteModel(3, "My", "name", "is 'getSomething from MyService 3'")
+)

@@ -15,28 +15,28 @@ class MainViewModel(
 ) : BaseViewModel<MainViewModel.Intent, MainViewModel.State>() {
 
     sealed interface Intent {
-        data object GetSomethingIntent : Intent
-        data class GetSomethingsIntent(val param: Int) : Intent
+        data object GetSomethingsIntent : Intent
+        data class GetSomethingIntent(val id: Int) : Intent
     }
 
     sealed interface State {
-        data class SomethingData(val myModel: MyModel) : State
+        data class SomethingData(val myModel: MyModel?) : State
         data class SomethingsData(val myModels: List<MyModel>) : State
     }
 
     override suspend fun processIntent(intent: Intent) {
         when (intent) {
-            Intent.GetSomethingIntent -> getSomething()
-            is Intent.GetSomethingsIntent -> getSomethings()
+            is Intent.GetSomethingIntent -> getSomething(intent.id)
+            Intent.GetSomethingsIntent -> getSomethings()
         }
     }
 
-    private suspend fun getSomething() {
-        emitState(State.SomethingData(getSomethingUseCase().toMyModel()))
+    private suspend fun getSomething(id: Int) {
+        emitState(State.SomethingData(getSomethingUseCase(id)?.toMyModel()))
     }
 
     private suspend fun getSomethings() {
-        emitState(State.SomethingsData(getSomethingsUseCase(0).map { it.toMyModel() }))
+        emitState(State.SomethingsData(getSomethingsUseCase().map { it.toMyModel() }))
     }
 }
 

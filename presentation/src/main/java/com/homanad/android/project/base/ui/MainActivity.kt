@@ -24,11 +24,11 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
     override fun handleUIEvent() {
         with(binding) {
             buttonForSomething.setOnClickListener {
-                mainViewModel.sendIntent(MainViewModel.Intent.GetSomethingIntent)
+                mainViewModel.sendIntent(MainViewModel.Intent.GetSomethingIntent(1))
             }
 
             buttonForSomethings.setOnClickListener {
-                mainViewModel.sendIntent(MainViewModel.Intent.GetSomethingsIntent(0))
+                mainViewModel.sendIntent(MainViewModel.Intent.GetSomethingsIntent)
             }
         }
     }
@@ -48,11 +48,12 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
     private fun handleState(state: MainViewModel.State) {
         when (state) {
             is MainViewModel.State.SomethingData -> {
-                binding.textForSomething.text = state.myModel.name
+                binding.textForSomething.text = state.myModel?.name ?: "Nothing"
             }
 
             is MainViewModel.State.SomethingsData -> {
-                binding.textForSomethings.text = state.myModels.joinToString("\n") { model -> model.name }
+                binding.textForSomethings.text =
+                    state.myModels.joinToString("\n") { model -> model.name }
             }
         }
     }
