@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     kotlin("kapt")
+    alias(libs.plugins.baselineprofile)
 }
 
 android {
@@ -21,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -45,6 +46,10 @@ android {
         viewBinding = true
         buildConfig = true
     }
+}
+
+baselineProfile {
+    dexLayoutOptimization = true
 }
 
 fun getInstrumentation(): String {
@@ -71,6 +76,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.profileinstaller)
 
     testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)
@@ -78,4 +84,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.cucumber.android.test)
     androidTestImplementation(libs.cucumber.picocontainer.test)
+    "baselineProfile"(project(":baselineprofile"))
 }
