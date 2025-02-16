@@ -50,6 +50,7 @@ android {
 
 baselineProfile {
     dexLayoutOptimization = true
+    automaticGenerationDuringBuild = true
 }
 
 fun getInstrumentation(): String {
