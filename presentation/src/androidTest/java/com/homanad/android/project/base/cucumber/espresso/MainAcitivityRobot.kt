@@ -1,5 +1,6 @@
 package com.homanad.android.project.base.cucumber.espresso
 
+import android.widget.TextView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
@@ -42,7 +43,10 @@ class MainActivityRobot {
         onView(withId(R.id.buttonForSomething)).perform(click())
     }
 
-    fun expectSomethingData() {
+    fun expectSomethingData(id: Int) {
+        onView(withId(R.id.textForSomethings)).check { view, noViewFoundException ->
+            (view as TextView).text.contains("$id")
+        }
         onView(withId(R.id.textForSomethings)).check(matches(isDisplayed()))
     }
 }

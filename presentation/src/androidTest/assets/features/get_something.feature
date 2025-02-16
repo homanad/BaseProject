@@ -7,7 +7,7 @@ Feature: Get Something
     And I type <id>
     And I close keyboard
     And I click something button
-    Then I expect to see something data
+    Then I expect to see something data with id: <id>
     Examples:
       | id |
       | 1  |

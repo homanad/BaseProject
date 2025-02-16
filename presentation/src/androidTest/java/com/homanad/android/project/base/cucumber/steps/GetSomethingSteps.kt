@@ -29,8 +29,8 @@ class GetSomethingSteps {
         robot.clickSomethingButton()
     }
 
-    @Then("^I expect to see something data$")
-    fun expectSomethingsData() {
-        robot.expectSomethingData()
+    @Then("^I expect to see something data with id: (\\S+)$")
+    fun expectSomethingsData(id: Int) {
+        robot.expectSomethingData(id)
     }
 }
