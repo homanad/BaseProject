@@ -24,7 +24,11 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
     override fun handleUIEvent() {
         with(binding) {
             buttonForSomething.setOnClickListener {
-                mainViewModel.sendIntent(MainViewModel.Intent.GetSomethingIntent(1))
+                mainViewModel.sendIntent(
+                    MainViewModel.Intent.GetSomethingIntent(
+                        edtId.text?.toString()?.toInt() ?: 1
+                    )
+                )
             }
 
             buttonForSomethings.setOnClickListener {

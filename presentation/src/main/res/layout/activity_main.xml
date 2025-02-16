@@ -11,18 +11,6 @@
         tools:context=".ui.MainActivity">
 
         <TextView
-            android:id="@+id/textForSomething"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
-
-        <Button
-            android:id="@+id/buttonForSomething"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Get something" />
-
-        <TextView
             android:id="@+id/textForSomethings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,10 +22,29 @@
             android:layout_height="wrap_content"
             android:text="Get somethings" />
 
+        <TextView
+            android:id="@+id/textForSomething"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/buttonForSomething"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get something" />
+
         <androidx.constraintlayout.helper.widget.Flow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="textForSomething, buttonForSomething, textForSomethings, buttonForSomethings"
+            app:constraint_referenced_ids="textForSomethings, buttonForSomethings, textForSomething, edtId, buttonForSomething"
             app:flow_verticalGap="60dp"
             app:flow_wrapMode="chain"
             app:layout_constraintBottom_toBottomOf="parent"
