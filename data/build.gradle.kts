@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.homanad.android.project.data"
+    namespace = "com.homanad.android.baseproject.data"
     compileSdk = 35
 
     defaultConfig {

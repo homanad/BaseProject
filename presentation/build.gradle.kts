@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.homanad.android.project.base"
+    namespace = "com.homanad.android.baseproject"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.homanad.android.project.base"
+        applicationId = "com.homanad.android.baseproject"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -50,12 +50,12 @@ android {
 
 baselineProfile {
     dexLayoutOptimization = true
-    automaticGenerationDuringBuild = true
+    automaticGenerationDuringBuild = false
 }
 
 fun getInstrumentation(): String {
     return if (project.hasProperty("cucumber"))
-        "com.homanad.android.project.base.cucumber.runner.CucumberTestRunner"
+        "com.homanad.android.baseproject.cucumber.runner.CucumberTestRunner"
     else "androidx.test.runner.AndroidJUnitRunner"
 }
 

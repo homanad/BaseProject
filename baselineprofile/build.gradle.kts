@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.homanad.android.project.base.baselineprofile"
+    namespace = "com.homanad.android.baseproject.baselineprofile"
     compileSdk = 35
 
     compileOptions {
