@@ -13,7 +13,8 @@ abstract class BaseBindingFragment<B : ViewDataBinding> : Fragment() {
 
     private lateinit var _binding: B
 
-    protected val binding = _binding
+    protected val binding: B
+        get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
